@@ -1,0 +1,23 @@
+package org.maples.gem.admin.controller;
+
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class RouteController {
+
+    @GetMapping("/index")
+    public ModelAndView getIndexFTL() {
+        return new ModelAndView("Index");
+    }
+
+    @ResponseBody
+    @GetMapping("/health")
+    public JSONObject getHealthStatus() {
+        return new JSONObject(true);
+    }
+
+}
