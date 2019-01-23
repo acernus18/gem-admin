@@ -14,6 +14,11 @@ public class RouteController {
         return new ModelAndView("Index");
     }
 
+    @GetMapping("/purchase")
+    public ModelAndView getPurchaseFTL() {
+        return new ModelAndView("Purchase");
+    }
+
     @ResponseBody
     @GetMapping("/health")
     public JSONObject getHealthStatus() {

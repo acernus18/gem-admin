@@ -14,5 +14,7 @@
     <result column="weight" jdbcType="DOUBLE" property="weight" />
     <result column="count_amount" jdbcType="SMALLINT" property="countAmount" />
     <result column="count_weight" jdbcType="SMALLINT" property="countWeight" />
+    <result column="create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="update_time" jdbcType="INTEGER" property="updateTime" />
   </resultMap>
 </mapper>
