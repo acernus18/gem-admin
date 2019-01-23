@@ -19,6 +19,9 @@
     <script src="/webjars/datatables-responsive/1.0.6/js/dataTables.responsive.js"></script>
     <script src="/webjars/js-xlsx/0.11.19/dist/xlsx.full.min.js"></script>
 
-    <link href="css/gem-admin.css" rel="stylesheet">
-    <script src="js/gem-admin.js"></script>
+    <link href="css/GemAdmin.css" rel="stylesheet">
+
+    <script src="js/GemAdmin.js"></script>
+    <script src="js/ExcelUtils.js"></script>
+    <script src="js/DataMapping.js"></script>
 </head>
