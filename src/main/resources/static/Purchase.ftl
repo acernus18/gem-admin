@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh">
 
-<#include "Header.ftl">
+<#include "template/Header.ftl">
 
 <body>
 
-<#include "Modal.ftl">
+<#include "template/Modal.ftl">
 
 <div id="wrapper">
 
-    <#include "Navigation.ftl">
+    <#include "template/Navigation.ftl">
 
     <div id="page-wrapper">
         <div class="row">

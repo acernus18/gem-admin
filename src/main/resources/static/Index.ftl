@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh">
 
-<#include "Header.ftl">
+<#include "template/Header.ftl">
 
 <body>
 
 <div id="wrapper">
 
-    <#include "Navigation.ftl">
+    <#include "template/Navigation.ftl">
 
     <div id="page-wrapper">
         <div class="row">
@@ -103,7 +103,18 @@
         }
     ];
 
-    $(document).ready(function () {
+    let settings = {
+        "url": "/stock/retrieve",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+        },
+        "data": "{}"
+    };
+
+    $.ajax(settings).done(function (response) {
+        data = response.data;
+
         $('#dataTables-example').DataTable({
             responsive: true,
             data: data,
@@ -119,6 +130,23 @@
             ]
         });
     });
+
+    // $(document).ready(function () {
+    //     $('#dataTables-example').DataTable({
+    //         responsive: true,
+    //         data: data,
+    //         columns: [
+    //             {data: "gemId"},
+    //             {data: "name"},
+    //             {data: "type"},
+    //             {data: "color"},
+    //             {data: "amount"},
+    //             {data: "weight"},
+    //             {data: "countAmount"},
+    //             {data: "countWeight"}
+    //         ]
+    //     });
+    // });
 </script>
 </body>
 

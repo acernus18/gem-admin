@@ -2,6 +2,8 @@ package org.maples.gem.admin.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.maples.gem.admin.model.Gemstone;
+import org.maples.gem.admin.repository.GemstoneMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/stock")
 public class StockController {
+
+    @Autowired
+    private GemstoneMapper gemstoneMapper;
 
     @PostMapping("/append")
     public void append(@RequestBody List<Gemstone> gemstones) {
@@ -30,6 +35,6 @@ public class StockController {
 
     @PostMapping("/retrieve")
     public Object retrieve(@RequestBody JSONObject conditions) {
-        return null;
+        return gemstoneMapper.selectAll();
     }
 }

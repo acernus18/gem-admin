@@ -20,47 +20,39 @@
                     <input type="text" class="form-control" placeholder="twitterhandle">
                 </div>
                 <br>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">默认
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="#">功能</a>
-                        </li>
-                        <li>
-                            <a href="#">另一个功能</a>
-                        </li>
-                        <li>
-                            <a href="#">其他</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">分离的链接</a>
-                        </li>
-                    </ul>
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control" aria-label="...">
                 </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">默认
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a href="#">功能</a>
-                        </li>
-                        <li>
-                            <a href="#">另一个功能</a>
-                        </li>
-                        <li>
-                            <a href="#">其他</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">分离的链接</a>
-                        </li>
-                    </ul>
+                <br />
+
+                <div class="input-group">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control" aria-label="...">
                 </div>
-                <br>
+                <br />
                 <div class="input-group">
                     <span class="input-group-addon">@</span>
                     <input type="text" class="form-control" placeholder="twitterhandle">
