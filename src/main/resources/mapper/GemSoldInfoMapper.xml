@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.maples.gem.admin.repository.GemSoldInfoMapper">
+    <resultMap id="BaseResultMap" type="org.maples.gem.admin.model.GemSoldInfo">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
+        <result column="sold_time" jdbcType="TIMESTAMP" property="soldTime"/>
+        <result column="gem_id" jdbcType="VARCHAR" property="gemId"/>
+        <result column="gem_name" jdbcType="VARCHAR" property="gemName"/>
+        <result column="gem_type" jdbcType="VARCHAR" property="gemType"/>
+        <result column="gem_number" jdbcType="INTEGER" property="gemNumber"/>
+        <result column="gem_weight" jdbcType="REAL" property="gemWeight"/>
+        <result column="gem_unit_price" jdbcType="REAL" property="gemUnitPrice"/>
+        <result column="gem_cost" jdbcType="REAL" property="gemCost"/>
+        <result column="gem_total_price" jdbcType="REAL" property="gemTotalPrice"/>
+        <result column="gem_real_price" jdbcType="REAL" property="gemRealPrice"/>
+        <result column="sold_to" jdbcType="VARCHAR" property="soldTo"/>
+        <result column="other" jdbcType="VARCHAR" property="other"/>
+    </resultMap>
+
+    <select id="listGemSoldInfoBySoldTo" resultMap="BaseResultMap">
+        select `gem_id`, `gem_name`, `gem_number`, `gem_weight`, `gem_unit_price`, `sold_time`, `sold_to`
+        from `tb_gem_sold_list`
+        where `sold_to` like '%${clientName}%'
+    </select>
+</mapper>

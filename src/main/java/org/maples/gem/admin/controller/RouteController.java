@@ -19,6 +19,11 @@ public class RouteController {
         return new ModelAndView("Purchase");
     }
 
+    @GetMapping("/soldList")
+    public ModelAndView getSoldListFTL() {
+        return new ModelAndView("SoldList");
+    }
+
     @ResponseBody
     @GetMapping("/health")
     public JSONObject getHealthStatus() {
