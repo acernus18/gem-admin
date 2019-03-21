@@ -12,6 +12,7 @@
     <link href="/webjars/datatables-responsive/1.0.6/css/dataTables.responsive.css" rel="stylesheet">
 
     <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+    <script src="/webjars/popper.js/1.14.6/popper.js"></script>
     <script src="/webjars/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="/webjars/metisMenu/1.1.3-1/metisMenu.min.js"></script>
     <script src="/webjars/datatables/1.10.12/js/jquery.dataTables.min.js"></script>

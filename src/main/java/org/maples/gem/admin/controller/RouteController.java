@@ -30,4 +30,13 @@ public class RouteController {
         return new JSONObject(true);
     }
 
+    @GetMapping("/code")
+    public ModelAndView getCodeFTL() {
+        return new ModelAndView("Code");
+    }
+
+    @GetMapping("/order")
+    public ModelAndView getOrderFTL() {
+        return new ModelAndView("Order");
+    }
 }
