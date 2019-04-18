@@ -18,7 +18,11 @@
         </div>
 
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchModal">
-            查询
+            通过客户姓名查询
+        </button>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchModalByGemID">
+            通过石号查询
         </button>
 
         <div class="row">
@@ -34,12 +38,12 @@
                                id="dataTables-example">
                             <thead>
                             <tr>
-                                <th>GEM ID</th>
-                                <th>NAME</th>
-                                <th>AMOUNT</th>
-                                <th>WEIGHT</th>
-                                <th>Sold Time</th>
-                                <th>Unit Price</th>
+                                <th>石号</th>
+                                <th>石名称</th>
+                                <th>客户名</th>
+                                <th>重量</th>
+                                <th>克拉价</th>
+                                <th>销售时间</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -74,7 +78,7 @@
         {
             "gemId": 1,
             "gemName": 1,
-            "gemNumber": 1,
+            "soldTo": 1,
             "gemWeight": 1,
             "gemUnitPrice": 1,
             "soldTime": 1,
@@ -87,7 +91,7 @@
         columns: [
             {data: "gemId"},
             {data: "gemName"},
-            {data: "gemNumber"},
+            {data: "soldTo"},
             {data: "gemWeight"},
             {data: "gemUnitPrice"},
             {data: "soldTime"}
@@ -97,6 +101,24 @@
     function search() {
         let settings = {
             "url": "/sold/get/" + $("#recipient-name").val(),
+            "method": "GET",
+            "headers": {
+                "Content-Type": "application/json",
+            }
+        };
+
+        $.ajax(settings).done(function (response) {
+            data = response;
+            console.log(response);
+            dataTable.clear();
+            dataTable.rows.add(response);
+            dataTable.draw(response);
+        });
+    }
+
+    function searchByGemID() {
+        let settings = {
+            "url": "/sold/getByGemID/" + $("#gem-id").val(),
             "method": "GET",
             "headers": {
                 "Content-Type": "application/json",

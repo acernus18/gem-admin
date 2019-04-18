@@ -24,4 +24,10 @@ public class SoldInfoController {
         log.info("Request for {}", clientName);
         return gemSoldInfoMapper.listGemSoldInfoBySoldTo(clientName);
     }
+
+    @GetMapping("/getByGemID/{gemID}")
+    public List<GemSoldInfo> listSoldInfoByGemID(@PathVariable("gemID") String gemID) {
+        log.info("Request for gemID = {}", gemID);
+        return gemSoldInfoMapper.selectGemSoldInfoByGemID(gemID);
+    }
 }

@@ -2,8 +2,11 @@ package org.maples.gem.admin.model;
 
 import lombok.Data;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Data
 @Table(name = "tb_gem_sold_list")

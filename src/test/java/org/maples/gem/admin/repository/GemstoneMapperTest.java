@@ -12,6 +12,6 @@ public class GemstoneMapperTest extends AdminApplicationTests {
 
     @Test
     public void test() {
-        Assert.assertTrue(!gemstoneMapper.selectAll().isEmpty());
+        Assert.assertFalse(gemstoneMapper.selectAll().isEmpty());
     }
 }

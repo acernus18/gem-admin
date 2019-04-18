@@ -26,4 +26,10 @@
         from `tb_gem_sold_list`
         where `sold_to` like '%${clientName}%'
     </select>
+
+    <select id="selectGemSoldInfoByGemID" resultMap="BaseResultMap">
+        select `gem_id`, `gem_name`, `gem_number`, `gem_weight`, `gem_unit_price`, `sold_time`, `sold_to`
+        from `tb_gem_sold_list`
+        where `gem_id` = '${gemID}'
+    </select>
 </mapper>

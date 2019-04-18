@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface GemSoldInfoMapper extends Mapper<GemSoldInfo> {
     List<GemSoldInfo> listGemSoldInfoBySoldTo(@Param("clientName") String clientName);
+    List<GemSoldInfo> selectGemSoldInfoByGemID(@Param("gemID") String gemID);
 }
 
