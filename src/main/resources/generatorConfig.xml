@@ -16,32 +16,44 @@
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
 
+        <!--connection configuration-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://120.78.175.39/db_jewelry?useSSL=false"
-                        userId="maples"
+                        connectionURL="jdbc:mysql://120.78.175.39:30001/db_jewelry?useSSL=false"
+                        userId="root"
                         password="dev#pass">
         </jdbcConnection>
 
+        <!--1 Model-->
         <javaModelGenerator targetPackage="org.maples.gem.admin.model"
                             targetProject="src/main/java"/>
-
+        <!--2 mapper.xml-->
         <sqlMapGenerator targetPackage="mapper"
                          targetProject="src/main/resources"/>
-
+        <!--3 Mapper -->
         <javaClientGenerator targetPackage="org.maples.gem.admin.repository"
                              targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="tb_gemstone" domainObjectName="Gemstone">
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
+        <!--<table tableName="tb_gemstone" domainObjectName="Gemstone">-->
+        <!--    <generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
 
-        <table tableName="tb_gem_sold_list" domainObjectName="GemSoldInfo">
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
+        <!--<table tableName="tb_gem_sold_list" domainObjectName="GemSoldInfo">-->
+        <!--    <generatedKey column="id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="tb_user" domainObjectName="User">-->
+        <!--    <generatedKey column="user_id" sqlStatement="JDBC"/>-->
+        <!--</table>-->
 
         <table tableName="tb_user" domainObjectName="User">
-            <generatedKey column="user_id" sqlStatement="JDBC"/>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="tb_role" domainObjectName="Role">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="tb_permission" domainObjectName="UserRolePermission">
+            <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
     </context>
 </generatorConfiguration>
