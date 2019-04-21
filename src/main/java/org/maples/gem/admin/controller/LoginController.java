@@ -3,16 +3,18 @@ package org.maples.gem.admin.controller;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.IOException;
 
 @Slf4j
 @Controller
@@ -35,26 +37,25 @@ public class LoginController {
             user.login(token);
             return "redirect:/index";
         }  catch (UnknownAccountException e) {
-            model.addAttribute("message", "账号不存在！");
-        } catch (DisabledAccountException e) {
-            model.addAttribute("message", "账号未启用！");
+            model.addAttribute("message", "Unknown Account");
         } catch (IncorrectCredentialsException e) {
-            model.addAttribute("message", "密码错误！");
-        } catch (Throwable e) {
-            model.addAttribute("message", "未知错误！");
+            model.addAttribute("message", "Incorrect credentials");
         }
         return "Login";
     }
 
     @GetMapping("/check")
     @ResponseBody
-    public Object check() {
+    public Object check() throws IOException, ClassNotFoundException {
         Subject currentUser = SecurityUtils.getSubject();
-        log.info(JSON.toJSONString(currentUser.getSession(), true));
+        Session session = currentUser.getSession();
+
+        log.info(JSON.toJSONString(session, true));
         log.info("authentication={}", currentUser.isAuthenticated());
         log.info("something={}", currentUser.hasRole("something"));
         log.info("SystemAdministrator={}", currentUser.hasRole("SystemAdministrator"));
-        return SecurityUtils.getSubject().getSession();
+
+        return "";
     }
 
     @GetMapping("/logout")
