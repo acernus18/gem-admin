@@ -4,7 +4,7 @@
     <title>登录</title>
 </head>
 <body>
-${message!"null"}
+${message}
 <form method="post" action="/login">
     <label>用户名：
         <input name="username">

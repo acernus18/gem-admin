@@ -1,11 +1,10 @@
 package org.maples.gem.admin.configuration;
 
-import org.apache.shiro.session.mgt.eis.CachingSessionDAO;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-import org.maples.gem.admin.repository.SessionRepository;
 import org.maples.gem.admin.service.SecurityService;
+import org.maples.gem.admin.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,15 +15,11 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    // @Bean
-    // public CachingSessionDAO sessionDAO() {
-    //     return new EnterpriseCacheSessionDAO();
-    // }
     @Autowired
-    private SessionRepository sessionRepository;
+    private SessionService sessionRepository;
 
     @Bean
-    public DefaultWebSessionManager sessionManager(CachingSessionDAO sessionDAO) {
+    public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setSessionDAO(sessionRepository);
         return sessionManager;

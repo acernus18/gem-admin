@@ -11,7 +11,9 @@ public class RouteController {
 
     @GetMapping("/index")
     public ModelAndView getIndexFTL() {
-        return new ModelAndView("Index");
+        ModelAndView modelAndView = new ModelAndView("Index");
+        modelAndView.addObject("test", "123");
+        return modelAndView;
     }
 
     @GetMapping("/purchase")

@@ -1,4 +1,4 @@
-package org.maples.gem.admin.repository;
+package org.maples.gem.admin.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.AbstractCacheManager;
@@ -10,7 +10,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.CachingSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.ByteArrayInputStream;
@@ -23,8 +23,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-@Repository
-public class SessionRepository extends CachingSessionDAO {
+@Service
+public class SessionService extends CachingSessionDAO {
     private static final String SESSION_PREFIX = "SESSION_";
 
     @Autowired
@@ -50,7 +50,7 @@ public class SessionRepository extends CachingSessionDAO {
         return (Session) ois.readObject();
     }
 
-    public SessionRepository() {
+    public SessionService() {
         super.setCacheManager(new AbstractCacheManager() {
             @Override
             protected Cache<Serializable, Session> createCache(String name) throws CacheException {

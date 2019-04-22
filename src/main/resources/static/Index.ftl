@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
-
 <#include "template/Header.ftl">
-
 <body>
-
 <div id="wrapper">
 
     <#include "template/Navigation.ftl">

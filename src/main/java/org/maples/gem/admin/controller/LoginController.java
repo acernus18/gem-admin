@@ -21,10 +21,11 @@ import java.io.IOException;
 public class LoginController {
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return "redirect:/index";
         }
+        model.addAttribute("message", "Success");
         return "Login";
     }
 
@@ -33,6 +34,7 @@ public class LoginController {
         Subject user = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         log.info("{} {}", username, password);
+        model.addAttribute("message", "Unknown Account");
         try {
             user.login(token);
             return "redirect:/index";
