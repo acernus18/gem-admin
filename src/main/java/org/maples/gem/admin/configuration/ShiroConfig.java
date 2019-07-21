@@ -42,11 +42,11 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/webjars/**", "anon");
-        filterChainDefinitionMap.put("/favicon.ico", "anon");
-        filterChainDefinitionMap.put("/login", "anon");
-        filterChainDefinitionMap.put("/check", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+        // filterChainDefinitionMap.put("/webjars/**", "anon");
+        // filterChainDefinitionMap.put("/favicon.ico", "anon");
+        // filterChainDefinitionMap.put("/login", "anon");
+        // filterChainDefinitionMap.put("/check", "anon");
+        filterChainDefinitionMap.put("/**", "anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
