@@ -87,4 +87,9 @@ public class RouteController {
         view.addObject("isOnline", String.valueOf(isServerOnline()));
         return view;
     }
+
+    @GetMapping("/generate")
+    public ModelAndView generate() {
+        return new ModelAndView("Buy");
+    }
 }

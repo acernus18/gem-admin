@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<#include "template/Header.ftl">
 
 <body>
 <div id="wrapper">
-    <#include "template/Navigation.ftl">
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
