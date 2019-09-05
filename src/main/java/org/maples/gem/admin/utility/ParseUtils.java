@@ -68,7 +68,7 @@ public class ParseUtils {
         }
 
         Random random = new Random();
-        if (random.nextInt(10000) > 6666) {
+        if (suffix != ' ' && random.nextInt(10000) > 6666) {
             builder.append(suffix).append(CODE.charAt(random.nextInt(10)));
         } else {
             builder.append(suffix);
@@ -80,7 +80,7 @@ public class ParseUtils {
     public static int decode(String value) {
         StringBuilder builder = new StringBuilder();
 
-        char[] chars = value.toCharArray();
+        char[] chars = value.trim().toCharArray();
         Map<Character, Integer> config = new HashMap<>();
         config.put('V', 0);
         config.put('H', 1);

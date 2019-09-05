@@ -22,14 +22,36 @@
             <table class="table">
                 <thead>
                 <tr>
+                    <th>类型</th>
                     <th>下载模板</th>
                     <th>生成提货单</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
+                    <td>总成本版本</td>
                     <td>
-                        <form method="POST" action="/data/template" class="form-inline">
+                        <form method="POST" action="/data/template/0" class="form-inline">
+                            <div class="form-group mb-2">
+                                <input type="submit" class="btn btn-primary" value="下载">
+                            </div>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="POST" action="/data/generateBuyOrder" enctype="multipart/form-data" class="form-inline">
+                            <div class="form-group mb-2">
+                                <input type="file" class="form-control-file" name="file">
+                            </div>
+                            <div class="form-group mb-2">
+                                <input type="submit" class="btn btn-primary" value="提交">
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>编码版本</td>
+                    <td>
+                        <form method="POST" action="/data/template/1" class="form-inline">
                             <div class="form-group mb-2">
                                 <input type="submit" class="btn btn-primary" value="下载">
                             </div>

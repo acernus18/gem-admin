@@ -15,28 +15,7 @@ import java.util.regex.Pattern;
 @Slf4j
 @Service
 public class BuyService {
-    public void getTemplate(OutputStream outputStream) {
-        List<List<Object>> result = new ArrayList<>();
-        List<Object> header = new ArrayList<>();
-        header.add("石号");
-        header.add("石名称");
-        header.add("石成本(总)");
-        header.add("石数");
-        header.add("石重");
-        header.add("供货商");
-        header.add("证书类别");
-        header.add("销售价");
-        result.add(header);
-        ExcelUtils.dump(result, outputStream);
-    }
-
-    public void generateBuyList(InputStream inputStream, OutputStream outputStream) {
-        List<List<String>> sheet = ExcelUtils.load(inputStream, 0);
-        List<List<String>> data = sheet.subList(1, sheet.size());
-
-        List<List<Object>> result = new ArrayList<>();
-
-        // Prepare header
+    private List<Object> getOutputHeader() {
         List<Object> header = new ArrayList<>();
         header.add("唯一号");
         header.add("石号");
@@ -57,16 +36,56 @@ public class BuyService {
         header.add("证书类别");
         header.add("销售价");
         header.add("证书费");
+        return header;
+    }
+
+    public void getTemplate(OutputStream outputStream, int index) {
+        List<List<Object>> result = new ArrayList<>();
+        List<Object> header = new ArrayList<>();
+        header.add("石号");
+        header.add("石名称");
+
+        if (index == 0) {
+            header.add("石成本(总)");
+        } else {
+            header.add("石编码");
+        }
+
+        header.add("石数");
+        header.add("石重");
+        header.add("供货商");
+        header.add("证书类别");
+        header.add("销售价");
         result.add(header);
+        ExcelUtils.dump(result, outputStream);
+    }
+
+
+    public void generateBuyList(InputStream inputStream, OutputStream outputStream) {
+        List<List<String>> sheet = ExcelUtils.load(inputStream, 0);
+        List<List<String>> data = sheet.subList(1, sheet.size());
+        List<List<Object>> result = new ArrayList<>();
+        result.add(getOutputHeader());
 
         for (List<String> row : data) {
-            int cost = Integer.parseInt(row.get(2));
             double weight = Double.parseDouble(row.get(4));
             int number = Integer.parseInt(row.get(3));
-
-            int unitCost = (int) Math.round(cost / weight);
-            String code = ParseUtils.encode(unitCost);
             double average = Double.parseDouble(String.format("%.2f", weight / number));
+
+
+            int cost = 0;
+            int unitCost = 0;
+            String code = null;
+
+            if (Pattern.matches("^\\d+$", row.get(2))) {
+                cost = Integer.parseInt(row.get(2));
+                unitCost = (int) Math.round(cost / weight);
+                code = ParseUtils.encode(unitCost);
+            } else if (Pattern.matches("^[VHKLMNRSTUCDEF]+$", row.get(2))) {
+                code = row.get(2);
+                unitCost = ParseUtils.decode(code);
+                cost = (int) Math.round(unitCost * weight);
+            }
 
             int id = Integer.parseInt(row.get(0));
             String name = row.get(1);

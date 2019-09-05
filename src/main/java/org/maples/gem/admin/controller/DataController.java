@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.maples.gem.admin.service.BuyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,12 +31,12 @@ public class DataController {
         return null;
     }
 
-    @PostMapping("/template")
-    public Object getTemplate(HttpServletResponse response) throws IOException {
+    @PostMapping("/template/{index}")
+    public Object getTemplate(@PathVariable("index") int index, HttpServletResponse response) throws IOException {
         response.setContentType("text/plain");
         response.setHeader("Content-disposition", "attachment; filename=template.xlsx");
         OutputStream outputStream = response.getOutputStream();
-        service.getTemplate(outputStream);
+        service.getTemplate(outputStream, index);
         return null;
     }
 
