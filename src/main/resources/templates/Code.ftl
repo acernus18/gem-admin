@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<#include "template/Header.ftl">
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/popper.js/1.14.7/popper.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
 <body>
-<#--<nav class="navbar navbar-expand-sm bg-light navbar-light">-->
-    <#--<a class="navbar-brand" href="#">立信</a>-->
-    <#--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">-->
-        <#--<span class="navbar-toggler-icon"></span>-->
-    <#--</button>-->
-    <#--<div class="collapse navbar-collapse" id="collapsibleNavbar">-->
-        <#--<ul class="navbar-nav">-->
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <a class="navbar-brand" href="#">立信</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
             <#--<li class="nav-item">-->
-                <#--<a class="nav-link" href="#">神秘代码转换器</a>-->
+            <#--    <a class="nav-link" href="#">神秘代码转换器</a>-->
             <#--</li>-->
             <#--<li class="nav-item">-->
-                <#--<a class="nav-link" href="#">Link</a>-->
+            <#--    <a class="nav-link" href="#">Link</a>-->
             <#--</li>-->
             <#--<li class="nav-item">-->
-                <#--<a class="nav-link" href="#">Link</a>-->
+            <#--    <a class="nav-link" href="#">Link</a>-->
             <#--</li>-->
-        <#--</ul>-->
-    <#--</div>-->
-<#--</nav>-->
-<#--<br>-->
+        </ul>
+    </div>
+</nav>
+<br>
 
 <div id="wrapper">
-    <#include "template/Navigation.ftl">
-
-
-
     <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Tables</h1>
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
+        <#--<div class="row">-->
+        <#--    <div class="col-lg-12">-->
+        <#--        <h1 class="page-header">Tables</h1>-->
+        <#--    </div>-->
+        <#--    <!-- /.col-lg-12 &ndash;&gt;-->
+        <#--</div>-->
 
         <div class="container">
             <div class="card">

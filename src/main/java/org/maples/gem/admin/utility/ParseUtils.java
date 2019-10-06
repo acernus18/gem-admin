@@ -96,6 +96,7 @@ public class ParseUtils {
         for (char c : chars) {
             if (config.containsKey(c)) {
                 builder.append(config.get(c));
+                continue;
             } else if (c == 'C') {
                 int count = 3 - builder.length();
                 for (int i = 0; i < count; i++) {
@@ -117,6 +118,7 @@ public class ParseUtils {
                     builder.append(0);
                 }
             }
+            break;
         }
         return Integer.parseInt(builder.toString());
     }
