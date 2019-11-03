@@ -2,6 +2,7 @@ package org.maples.gem.admin.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.maples.gem.admin.service.BuyService;
+import org.maples.gem.admin.service.SoldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,10 @@ import java.io.OutputStream;
 public class DataController {
 
     @Autowired
-    private BuyService service;
+    private BuyService buyService;
+
+    @Autowired
+    private SoldService soldService;
 
     @GetMapping("/search")
     public Object search(HttpServletRequest request) {
@@ -36,7 +40,7 @@ public class DataController {
         response.setContentType("text/plain");
         response.setHeader("Content-disposition", "attachment; filename=template.xlsx");
         OutputStream outputStream = response.getOutputStream();
-        service.getTemplate(outputStream, index);
+        buyService.getTemplate(outputStream, index);
         return null;
     }
 
@@ -48,7 +52,14 @@ public class DataController {
 
         InputStream inputStream = file.getInputStream();
         OutputStream outputStream = response.getOutputStream();
-        service.generateBuyList(inputStream, outputStream);
+        buyService.generateBuyList(inputStream, outputStream);
+        return null;
+    }
+
+    @PostMapping("/importSoldList")
+    public Object importSoldList(@RequestParam("file") MultipartFile file, Integer flag) throws Exception {
+        InputStream inputStream = file.getInputStream();
+        soldService.importSoldInfoList(inputStream, flag == null ? 0 : flag);
         return null;
     }
 }
