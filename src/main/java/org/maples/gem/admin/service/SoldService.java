@@ -1,6 +1,5 @@
 package org.maples.gem.admin.service;
 
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
 import org.maples.gem.admin.model.GemSoldInfo;
@@ -23,9 +22,11 @@ public class SoldService {
     private GemSoldInfoMapper gemSoldInfoMapper;
 
     @Transactional
-    public void importSoldInfoList(InputStream inputStream, int flag) throws ParseException {
+    public void importSoldInfoList(InputStream inputStream) throws ParseException {
         List<List<String>> info = ExcelUtils.load(inputStream, 0);
-        info.remove(0);
+
+        info.remove(0); // Remove tag
+
         for (List<String> line : info) {
             GemSoldInfo soldInfo = new GemSoldInfo();
             soldInfo.setSoldTime(DateUtils.parseDate(line.get(0), "MM/dd/yy"));
@@ -45,15 +46,7 @@ public class SoldService {
                 soldInfo.setGemCost(Float.parseFloat(cost));
             }
 
-            if (flag == 0) {
-                log.info(JSON.toJSONString(soldInfo));
-            } else {
-                gemSoldInfoMapper.insert(soldInfo);
-            }
-        }
-
-        if (flag == 1) {
-            throw new RuntimeException("Now rollback");
+            gemSoldInfoMapper.insert(soldInfo);
         }
     }
 

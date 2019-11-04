@@ -57,9 +57,9 @@ public class DataController {
     }
 
     @PostMapping("/importSoldList")
-    public Object importSoldList(@RequestParam("file") MultipartFile file, Integer flag) throws Exception {
+    public Object importSoldList(@RequestParam("file") MultipartFile file) throws Exception {
         InputStream inputStream = file.getInputStream();
-        soldService.importSoldInfoList(inputStream, flag == null ? 0 : flag);
+        soldService.importSoldInfoList(inputStream);
         return null;
     }
 }

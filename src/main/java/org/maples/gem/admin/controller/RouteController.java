@@ -92,4 +92,9 @@ public class RouteController {
     public ModelAndView generate() {
         return new ModelAndView("Buy");
     }
+
+    @GetMapping("/import")
+    public String importSoldList() {
+        return "Import";
+    }
 }
