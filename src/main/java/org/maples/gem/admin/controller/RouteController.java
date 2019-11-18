@@ -97,4 +97,9 @@ public class RouteController {
     public String importSoldList() {
         return "Import";
     }
+
+    @GetMapping("file")
+    public String file() {
+        return "File";
+    }
 }
