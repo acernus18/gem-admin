@@ -3,6 +3,7 @@ package org.maples.gem.admin.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.maples.gem.admin.service.BuyService;
 import org.maples.gem.admin.service.SoldService;
+import org.maples.gem.admin.utility.ExcelUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -33,6 +38,21 @@ public class DataController {
     public Object search(HttpServletRequest request) {
 
         return null;
+    }
+
+    @GetMapping("/isServerOnline")
+    public boolean isServerOnline() throws IOException {
+        Socket socket = new Socket();
+        socket.connect(new InetSocketAddress("lisimin16.eicp.net", 35890), 1000);
+        boolean result = socket.isConnected();
+
+        socket.close();
+        return result;
+    }
+
+    @PostMapping("/loadExcel")
+    public List<List<String>> loadExcel(@RequestParam("file") MultipartFile file) throws IOException {
+        return ExcelUtils.load(file.getInputStream(), 0);
     }
 
     @PostMapping("/template/{index}")
@@ -61,5 +81,10 @@ public class DataController {
         InputStream inputStream = file.getInputStream();
         soldService.importSoldInfoList(inputStream);
         return null;
+    }
+
+    @GetMapping("/soldList")
+    public List<Map<String, String>> getSoldList(Integer flag, String value) {
+        return soldService.getSoldList(flag, value);
     }
 }

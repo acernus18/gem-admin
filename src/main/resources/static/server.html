@@ -1,0 +1,51 @@
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>服务器状态监控</title>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="/webjars/vue/2.6.10/dist/vue.min.js"></script>
+</head>
+<body>
+<div id="application" class="jumbotron text-center display-1">
+    <div v-if="isOnline">
+        服务器状态监控
+        <span class="badge badge-success">在线</span>
+    </div>
+    <div v-else>
+        服务器状态监控
+        <span class="badge badge-danger">离线</span>
+        <span class="display-4 text-danger">请检查服务器是否关机或网络是否正常</span>
+    </div>
+</div>
+
+<script>
+    let application = new Vue({
+        el: "#application",
+        data: {
+            timer: "",
+            isOnline: false,
+        },
+
+        methods: {
+            query: function () {
+                console.log("Begin check");
+                let request = new XMLHttpRequest();
+                request.onload = function (e) {
+                    if (this.readyState === 4) {
+                        application["isOnline"] = request.responseText === "true";
+                    }
+                };
+                request.open("GET", "/data/isServerOnline");
+                request.send();
+            },
+        },
+        mounted: function () {
+            this.query();
+        },
+    });
+</script>
+
+</body>
+</html>

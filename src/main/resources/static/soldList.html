@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+
+    <title>销售订单查询</title>
+
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/webjars/vue/2.6.10/dist/vue.min.js"></script>
+    <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div id="container">
+    <div id="application">
+        <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1">检索客户</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">客户名</label>
+                                <input type="text" class="form-control" id="recipient-name">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="search()">查询
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="searchModalByGemID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2">检索</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="gem-id" class="col-form-label">石号</label>
+                                <input type="text" class="form-control" id="gem-id">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="searchByGemID()">
+                            查询
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron text-center">
+            <h1>销售订单查询</h1>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchModal">
+                    通过客户姓名查询
+                </button>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchModalByGemID">
+                    通过石号查询
+                </button>
+            </div>
+            <div class="card-body">
+                <table id="dataTables-example" class="table table-responsive">
+                    <thead>
+                    <tr>
+                        <th scope="col">石号</th>
+                        <th scope="col">石名称</th>
+                        <th scope="col">客户名</th>
+                        <th scope="col">重量</th>
+                        <th scope="col">克拉价</th>
+                        <th scope="col">销售时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="item in items">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.client}}</td>
+                        <td>{{item.weight}}</td>
+                        <td>{{item.unitPrice}}</td>
+                        <td>{{item.soldTime}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let application = new Vue({
+        el: "#application",
+        data: {
+            items: [],
+        },
+        methods: {
+            search: function () {
+                let request = new XMLHttpRequest();
+                request.onload = function (e) {
+                    if (this.readyState === 4) {
+                        application["items"] = JSON.parse(this.responseText);
+                    }
+                };
+                request.open("GET", "/data/soldList?flag=0&value=" + document.getElementById("recipient-name").value);
+                request.send();
+            },
+
+            searchByGemID: function () {
+                let request = new XMLHttpRequest();
+                request.onload = function (e) {
+                    if (this.readyState === 4) {
+                        application["items"] = JSON.parse(this.responseText);
+                    }
+                };
+                request.open("GET", "/data/soldList?flag=1&value=" + document.getElementById("gem-id").value);
+                request.send();
+            },
+        },
+    });
+</script>
+
+
+</body>
+
+</html>

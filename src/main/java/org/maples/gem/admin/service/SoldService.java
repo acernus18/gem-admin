@@ -12,7 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -48,6 +52,35 @@ public class SoldService {
 
             gemSoldInfoMapper.insert(soldInfo);
         }
+    }
+
+    public List<Map<String, String>> getSoldList(Integer flag, String value) {
+        List<Map<String, String>> list = new ArrayList<>();
+        List<GemSoldInfo> queryList = new ArrayList<>();
+        if (flag != null) {
+            switch (flag) {
+                case 0:
+                    queryList = gemSoldInfoMapper.listGemSoldInfoBySoldTo(value.trim());
+                    break;
+                case 1:
+                    queryList = gemSoldInfoMapper.selectGemSoldInfoByGemID(value.trim());
+                    break;
+            }
+        }
+
+        queryList.forEach(x -> {
+            Map<String, String> info = new HashMap<>();
+
+            info.put("id", x.getGemId());
+            info.put("name", x.getGemName());
+            info.put("client", x.getSoldTo());
+            info.put("weight", String.valueOf(x.getGemWeight()));
+            info.put("unitPrice", String.valueOf(x.getGemUnitPrice()));
+            info.put("soldTime", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(x.getSoldTime()));
+
+            list.add(info);
+        });
+        return list;
     }
 
 }
