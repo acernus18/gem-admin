@@ -1,6 +1,7 @@
 package org.maples.gem.admin.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.maples.gem.admin.utility.ConstUtils;
 import org.maples.gem.admin.utility.ExcelUtils;
 import org.maples.gem.admin.utility.ParseUtils;
@@ -68,10 +69,13 @@ public class BuyService {
         result.add(getOutputHeader());
 
         for (List<String> row : data) {
+            if (row.stream().allMatch(StringUtils::isBlank)) {
+                continue;
+            }
+
             double weight = Double.parseDouble(row.get(4));
             int number = Integer.parseInt(row.get(3));
             double average = Double.parseDouble(String.format("%.2f", weight / number));
-
 
             int cost = 0;
             int unitCost = 0;

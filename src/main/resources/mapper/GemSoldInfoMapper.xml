@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.maples.gem.admin.repository.GemSoldInfoMapper">
     <resultMap id="BaseResultMap" type="org.maples.gem.admin.model.GemSoldInfo">
-        <!--
-          WARNING - @mbg.generated
-        -->
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
         <result column="sold_time" jdbcType="TIMESTAMP" property="soldTime"/>
@@ -22,13 +19,13 @@
     </resultMap>
 
     <select id="listGemSoldInfoBySoldTo" resultMap="BaseResultMap">
-        select `gem_id`, `gem_name`, `gem_number`, `gem_weight`, `gem_unit_price`, `sold_time`, `sold_to`
+        select *
         from `tb_gem_sold_list`
         where `sold_to` like '%${clientName}%'
     </select>
 
     <select id="selectGemSoldInfoByGemID" resultMap="BaseResultMap">
-        select `gem_id`, `gem_name`, `gem_number`, `gem_weight`, `gem_unit_price`, `sold_time`, `sold_to`
+        select *
         from `tb_gem_sold_list`
         where `gem_id` = '${gemID}'
     </select>

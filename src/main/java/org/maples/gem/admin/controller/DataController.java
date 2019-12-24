@@ -1,6 +1,8 @@
 package org.maples.gem.admin.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.maples.gem.admin.model.GemSoldInfo;
+import org.maples.gem.admin.service.AnalysisService;
 import org.maples.gem.admin.service.BuyService;
 import org.maples.gem.admin.service.SoldService;
 import org.maples.gem.admin.utility.ExcelUtils;
@@ -18,8 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +37,9 @@ public class DataController {
 
     @Autowired
     private SoldService soldService;
+
+    @Autowired
+    private AnalysisService analysisService;
 
     @GetMapping("/search")
     public Object search(HttpServletRequest request) {
@@ -86,5 +93,18 @@ public class DataController {
     @GetMapping("/soldList")
     public List<Map<String, String>> getSoldList(Integer flag, String value) {
         return soldService.getSoldList(flag, value);
+    }
+
+    @PostMapping("/queryList")
+    public List<GemSoldInfo> queryList(String statement) {
+        List<GemSoldInfo> result = null;
+        try {
+            String condition = URLDecoder.decode(statement, "UTF-8");
+            log.info("Recv: {}", condition);
+            result = analysisService.queryInfoList(condition);
+        } catch (UnsupportedEncodingException e) {
+            log.warn(e.getLocalizedMessage());
+        }
+        return result;
     }
 }
