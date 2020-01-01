@@ -16,7 +16,7 @@ public class ParseUtils {
     public static Map<String, String> parse(String name) {
         Map<String, String> result = new HashMap<>();
 
-        Matcher matcher = Pattern.compile("^.*?\\W?([VHKLMNRSTUCDEF]+)\\W?.*$").matcher(name);
+        Matcher matcher = Pattern.compile("^.*?\\W?([VHKLMNRSTUBCDEF]+)\\W?.*$").matcher(name);
         if (matcher.matches()) {
             result.put("code", matcher.group(1));
         }
@@ -26,7 +26,7 @@ public class ParseUtils {
             result.put("weight", matcher.group(1));
         }
 
-        matcher = Pattern.compile("^\\s*([^VHKLMNRSTUCDEF\\s]+).*$").matcher(name);
+        matcher = Pattern.compile("^\\s*([^VHKLMNRSTUBCDEF\\s]+).*$").matcher(name);
         if (matcher.matches()) {
             result.put("name", matcher.group(1));
         }
@@ -42,6 +42,10 @@ public class ParseUtils {
         String valueString = String.valueOf(value);
         char suffix = ' ';
         switch (valueString.length()) {
+            case 2:
+                suffix = 'B';
+                valueString = StringUtils.strip(valueString.substring(0, 1), "0");
+                break;
             case 3:
                 suffix = 'C';
                 valueString = StringUtils.strip(valueString.substring(0, 2), "0");
@@ -97,6 +101,11 @@ public class ParseUtils {
             if (config.containsKey(c)) {
                 builder.append(config.get(c));
                 continue;
+            } else if (c == 'B') {
+                int count = 2 - builder.length();
+                for (int i = 0; i < count; i++) {
+                    builder.append(0);
+                }
             } else if (c == 'C') {
                 int count = 3 - builder.length();
                 for (int i = 0; i < count; i++) {

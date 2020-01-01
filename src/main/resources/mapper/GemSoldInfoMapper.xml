@@ -29,4 +29,12 @@
         from `tb_gem_sold_list`
         where `gem_id` = '${gemID}'
     </select>
+
+    <select id="selectNumberByVerifiedInfo" resultType="Integer">
+        select count(0)
+        from tb_gem_sold_list
+        where gem_name = #{name}
+          and gem_weight = #{weight}
+          and gem_real_price = #{price}
+    </select>
 </mapper>

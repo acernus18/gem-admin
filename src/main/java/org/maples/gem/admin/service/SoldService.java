@@ -29,9 +29,12 @@ public class SoldService {
     public void importSoldInfoList(InputStream inputStream) throws ParseException {
         List<List<String>> info = ExcelUtils.load(inputStream, 0);
 
+        int counter = 0;
+
         info.remove(0); // Remove tag
 
         for (List<String> line : info) {
+
             GemSoldInfo soldInfo = new GemSoldInfo();
             soldInfo.setSoldTime(DateUtils.parseDate(line.get(0), "MM/dd/yy"));
             soldInfo.setOrderId(line.get(1));
@@ -50,8 +53,21 @@ public class SoldService {
                 soldInfo.setGemCost(Float.parseFloat(cost));
             }
 
-            gemSoldInfoMapper.insert(soldInfo);
+            Integer number = gemSoldInfoMapper.selectNumberByVerifiedInfo(
+                    soldInfo.getGemName(),
+                    soldInfo.getGemWeight(),
+                    soldInfo.getGemRealPrice());
+
+            if (number != null && number == 0) {
+                log.info("Sold record {} Not exist", soldInfo.getOrderId());
+                gemSoldInfoMapper.insert(soldInfo);
+            } else {
+                counter++;
+                log.warn("Sold record {} has existed", soldInfo.getOrderId());
+            }
         }
+
+        log.warn("Sold record existed count {}", counter);
     }
 
     public List<Map<String, String>> getSoldList(Integer flag, String value) {

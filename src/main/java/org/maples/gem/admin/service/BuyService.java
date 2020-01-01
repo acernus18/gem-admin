@@ -85,7 +85,7 @@ public class BuyService {
                 cost = Integer.parseInt(row.get(2));
                 unitCost = (int) Math.round(cost / weight);
                 code = ParseUtils.encode(unitCost);
-            } else if (Pattern.matches("^[VHKLMNRSTUCDEF]+$", row.get(2))) {
+            } else if (Pattern.matches("^[VHKLMNRSTUBCDEF]+$", row.get(2))) {
                 code = row.get(2);
                 unitCost = ParseUtils.decode(code);
                 cost = (int) Math.round(unitCost * weight);
